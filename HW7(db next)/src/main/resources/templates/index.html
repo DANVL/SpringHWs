@@ -17,7 +17,7 @@
                 type: 'GET',
                 url: '/api/books/' + $('#searchTitle').val(),
                 success: function (response) {
-                    response.forEach(function (book) {
+                    response.content.forEach(function (book) {
                         books.append('<tr>' +
                             '<td>' + book.name + '</td>' +
                             '<td>' + book.ISBN + '</td>' +
@@ -51,7 +51,7 @@
                         type: 'GET',
                         url: '/api/books',
                         success: function (response) {
-                            response.forEach(function (book) {
+                            response.content.forEach(function (book) {
                                 books.append('<tr>' +
                                     '<td>' + book.name + '</td>' +
                                     '<td>' + book.isbn + '</td>' +
@@ -71,7 +71,8 @@
         $.ajax({
             url: '/api/books',
             success: function (response) {
-                response.forEach(book => books.append('<tr>' +
+                console.log(response)
+                response.content.forEach(book => books.append('<tr>' +
                     '<td>' + book.name + '</td>' +
                     '<td>' + book.isbn + '</td>' +
                     '<td>' + book.author + '</td>' +
