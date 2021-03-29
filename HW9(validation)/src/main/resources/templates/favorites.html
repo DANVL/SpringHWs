@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Favs</title>
+</head>
+<script>
+    $(function () {
+        $('#unlike').click(function () {
+            let isbn = this.name;
+            $.ajax({
+                type: 'POST',
+                url: '/api/favorites/'+isbn,
+                success: function (response) {
+                    alert("Unliked")
+                    this.disabled = true;
+                }
+            });
+        });
+    })
+</script>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>ISBN</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book: ${books}">
+        <td th:text="${book.isbn}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td>
+            <button id="unlike" name="${book.isbn}" type="submit">Unlike</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
